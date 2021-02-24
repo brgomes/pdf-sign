@@ -1,6 +1,8 @@
 How to use
 ==========
 
+    composer install
+
 Create your .pem public and private files based on your .pfx certificate file. The commands are just below.
 
 Put .pdf file named **source.pdf** on root directory.
