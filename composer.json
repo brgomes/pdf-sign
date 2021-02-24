@@ -1,0 +1,15 @@
+{
+    "name": "bruno/pdf-sign2",
+    "description": "PDF Signer",
+    "type": "project",
+    "require": {
+        "tecnickcom/tcpdf": "^6.3",
+        "setasign/fpdi": "^2.3"
+    },
+    "authors": [
+        {
+            "name": "Bruno Roberto Gomes",
+            "email": "bruno@brgomes.com"
+        }
+    ]
+}
