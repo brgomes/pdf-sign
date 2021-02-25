@@ -21,7 +21,7 @@ independente de ter chave ou não, pois o certificado já estará
 guardado no servidor.
 **/
 
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 
 date_default_timezone_set('America/Araguaina');
 setlocale(LC_CTYPE, 'pt_BR');
@@ -34,55 +34,19 @@ define('SOURCE_PDF_FILE', 'source.pdf');
 define('OUTPUT_PDF_NAME', 'output.pdf');
 
 require 'vendor/autoload.php';
-
-// @codingStandardsIgnoreFile
-use setasign\Fpdi\Tcpdf\Fpdi;
-
-class MyPDF extends Fpdi
-{
-    public $currentPage;
-    public $totalPages;
-
-    // Page footer
-    public function Footer()
-    {
-        // Last page
-        if ($this->currentPage == $this->totalPages) {
-            // Position at 10 mm from bottom
-            $this->SetY(-10);
-            // Set font
-            $this->SetFont('courier', '', 5);
-            // Page number
-            //$this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-
-            $texto = 'Assinado digitalmente por FUNDAÇÃO UNIRG. Data: ' . date('d/m/Y H:i:s') . ' -03:00. Código de autenticação: 1A2B3C4D';
-            $this->Cell(0, 10, $texto, 0, false, 'C', 0, '', 0, false, 'T', 'M');
-
-            // set additional information
-            $info = array(
-                'Location' => 'Núcleo de Tecnologia da Informação - Universidade UnirG',
-                'Reason' => 'Documento assinado digitalmente sem interferência humana',
-            );
-
-            $certificate = 'file:///' . __DIR__ . '/' . CERT_PUBLIC;
-            $signature = 'file:///' . __DIR__ . '/' . CERT_PRIVATE;
-
-            $this->setSignature($certificate, $signature, CERT_PASSWORD, '', 2, $info);
-            $this->setSignatureAppearance(10, 290, 190, 4); // X: a partir da coluna 10, largura de 190; Y: a partir da linha 290, altura de 4
-        }
-    }
-}
+require 'PDFSign.php';
 
 $output     = __DIR__ . '/' . OUTPUT_PDF_NAME;
 $source     = __DIR__ . '/' . SOURCE_PDF_FILE;
 $command    = __DIR__ . '/gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile="' . $output . '" "' . $source . '"';
+
 exec($command);
 
-$pdf = new MyPDF('P', 'mm', 'A4');
+$pdf = new PDFSign('P', 'mm', 'A4');
 $pages = $pdf->setSourceFile(__DIR__ . '/' . OUTPUT_PDF_NAME);
 $pdf->totalPages = $pages;
 
-for ($i = 1; $i <= $pages; $i++) {
+for ($i=1; $i<=$pages; $i++) {
     $pdf->AddPage();
     $page = $pdf->importPage($i);
     $pdf->useTemplate($page, 0, 0);
