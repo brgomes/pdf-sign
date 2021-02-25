@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  pdf:
+    container_name: pdf-php
+    build: ./
+    working_dir: /var/www
+    depends_on:
+      - nginx
+    volumes:
+      - ./docker-compose/php.ini:/usr/local/etc/php/php.ini
+      - ./:/var/www
+
+  nginx:
+    image: nginx:alpine
+    container_name: pdf-nginx
+    ports:
+      - 8001:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
