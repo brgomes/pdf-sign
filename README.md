@@ -17,9 +17,9 @@ Open the address on navigator. The signed .pdf file it'll call **output.pdf**.
 Convert .pfx certificate in .crt file
 =====================================
 
-**.pfx certificate to .crt FILE:**
+**.pfx certificate to .crt file:**
 
-    openssl pkcs12 -in filename.pfx -out CERTIFICATE.crt -nodes
+    openssl pkcs12 -in PFX_FILE.pfx -out CERTIFICATE.crt -nodes
 
 
 The command above needs the certificate password.
