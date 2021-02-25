@@ -29,10 +29,9 @@ class PDFSign extends Fpdi
                 'Reason' => 'Documento assinado digitalmente sem interferência humana',
             );
 
-            $certificate = 'file:///' . __DIR__ . '/' . CERT_PUBLIC;
-            $signature = 'file:///' . __DIR__ . '/' . CERT_PRIVATE;
+            $certificate = 'file:///' . __DIR__ . '/' . CERTIFICATE;
 
-            $this->setSignature($certificate, $signature, CERT_PASSWORD, '', 2, $info);
+            $this->setSignature($certificate, $certificate, '', '', 2, $info);
             $this->setSignatureAppearance(10, 290, 190, 4); // X: a partir da coluna 10, largura de 190; Y: a partir da linha 290, altura de 4
         }
     }

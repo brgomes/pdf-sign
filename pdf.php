@@ -26,10 +26,8 @@ ini_set('display_errors', 1);
 date_default_timezone_set('America/Araguaina');
 setlocale(LC_CTYPE, 'pt_BR');
 
-// set certificate file
-define('CERT_PASSWORD', 'secret');
-define('CERT_PUBLIC', 'PUBLIC_CERT.pem');
-define('CERT_PRIVATE', 'PRIVATE_KEY.pem');
+// set files
+define('CERTIFICATE', 'CERTIFICATE.crt');
 define('SOURCE_PDF_FILE', 'source.pdf');
 define('OUTPUT_PDF_NAME', 'output.pdf');
 

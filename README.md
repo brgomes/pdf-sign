@@ -3,7 +3,7 @@ How to use
 
     composer install
 
-Create your .pem public and private files based on your .pfx certificate file. The commands are just below.
+Create your .crt file based on your .pfx certificate file. The command is just below.
 
 Put .pdf file named **source.pdf** on root directory.
 
@@ -14,22 +14,15 @@ Run using the native PHP server:
 Open the address on navigator. The signed .pdf file it'll call **output.pdf**.
 
 
-Convert .pfx certificate in .pem files
-======================================
+Convert .pfx certificate in .crt file
+=====================================
 
-**.pfx certificate to PRIVATE .pem:**
+**.pfx certificate to .crt FILE:**
 
-    openssl pkcs12 -in filename.pfx -nocerts -out PRIVATE_KEY.pem
-
-**.pfx certificate to PUBLIC .pem:**
-
-    openssl pkcs12 -in filename.pfx -clcerts -nokeys -out PUBLIC_CERT.pem
+    openssl pkcs12 -in filename.pfx -out CERTIFICATE.crt -nodes
 
 
-Both above commands need the certificate password.
-
-To generate private .pem file is necessary to inform a password,
-that is used in a PHP constant called CERT_PASSWORD.
+The command above needs the certificate password.
 
 About
 =====

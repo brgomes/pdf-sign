@@ -1,5 +1,4 @@
-/PRIVATE_KEY.pem
-/PUBLIC_CERT.pem
+/CERTIFICATE.crt
 /vendor
 /output.pdf
 /source.pdf
